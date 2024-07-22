@@ -1,3 +1,7 @@
 .gradle
-./build
-./target
+build
+target
+cache
+deviceInfo
+botInfo.properties
+.idea
