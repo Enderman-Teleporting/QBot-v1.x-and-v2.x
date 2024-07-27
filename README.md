@@ -25,4 +25,4 @@
 4. 输入`pip install -r requirements.txt`以下载Python依赖
 5. 下载完成后运行run.bat，会弹出两个窗口
 6. 在机器人窗口（Java）中按提示进行扫码登录
-7. 完成！
+7. 完成！在Java窗口中可以输入help进行命令查询，可按提示输入指令
