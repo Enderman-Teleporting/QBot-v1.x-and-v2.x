@@ -21,7 +21,7 @@ public class Client {
         }
     }
     public static String getReply(String msg) throws IOException {
-        writer.println("嘿"+msg);
+        writer.println(msg);
         return reader.readLine();
     }
 }
