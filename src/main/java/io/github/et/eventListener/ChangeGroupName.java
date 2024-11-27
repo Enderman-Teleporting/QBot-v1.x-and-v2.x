@@ -25,7 +25,7 @@ public class ChangeGroupName extends SimpleListenerHost {
     @EventHandler
     public void change(GroupMessageEvent msgEvent) throws LoggerNotDeclaredException {
         if(msgEvent.getMessage().contentToString().startsWith("群名称 ")){
-            String message=msgEvent.getMessage().contentToString().replace("群名称 ","");
+            String message=msgEvent.getMessage().contentToString().substring(5);
             msgEvent.getSubject().setName(message);
             Logger logger = Logger.getDeclaredLogger();
             logger.info("Handled a change-group-name request");
