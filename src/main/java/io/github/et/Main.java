@@ -47,18 +47,6 @@ public class Main {
         Bot bot= BotBuilder.positive(botInfo.getProperty("host"))
                 .token(botInfo.getProperty("token"))
                 .connect();
-//        Bot bot= BotFactory.INSTANCE.newBot(Long.parseLong(botInfo.getProperty("qq")), BotAuthorization.byQRCode(), botConfiguration -> {
-//            botConfiguration.setProtocol(BotConfiguration.MiraiProtocol.ANDROID_WATCH);
-//            botConfiguration.setHeartbeatStrategy(BotConfiguration.HeartbeatStrategy.REGISTER);
-//            botConfiguration.setWorkingDir(new File("."));
-//            botConfiguration.setCacheDir(new File("cache"));
-//            File file=new File("./deviceInfo");
-//            if (!file.exists()){
-//                file.mkdir();
-//            }
-//            botConfiguration.fileBasedDeviceInfo("deviceInfo/device.json");
-//
-//        });
         if(bot==null){
             throw new BotInfoNotFoundException();
         }
