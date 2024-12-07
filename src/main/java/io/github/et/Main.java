@@ -3,10 +3,7 @@ package io.github.et;
 import io.github.et.eventListener.*;
 import io.github.et.exceptions.BotInfoNotFoundException;
 import io.github.et.games.roulette.Roulette;
-import io.github.et.messager.Nudger;
-import io.github.et.messager.Repeater;
-import io.github.et.messager.Replier;
-import io.github.et.messager.ServerSearcher;
+import io.github.et.messager.*;
 import io.github.et.tools.CommandConsole;
 import io.github.ettoolset.tools.deamon.Deamon;
 import io.github.ettoolset.tools.deamon.RunMethod;
@@ -24,6 +21,9 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class Main {
+    public static String URL = "https://free.v36.cm/v1/chat/completions";
+    public static String Image_URL = "https://free.v36.cm/v1/images/generations";
+    public static String APIKEY;
     public static void main(String[] args) throws IOException, BotInfoNotFoundException, RepeatedLoggerDeclarationException, LevelNotMatchException {
         Logger logger;
         System.out.println("Trying to load bot info from ./botInfo.properties");
@@ -73,6 +73,7 @@ public class Main {
         }
         if(botInfo.get("Reply").equals("true")){
             bot.getEventChannel().registerListenerHost(new Replier());
+            APIKEY= botInfo.getProperty("API_KEY","");
             logger.fine("Registered listener Replier");
         }
         if(botInfo.get("PassAddRequest").equals("true")){

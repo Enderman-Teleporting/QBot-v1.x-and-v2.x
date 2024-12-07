@@ -1,6 +1,7 @@
 package io.github.et.messager;
 
 import io.github.et.exceptions.messageExceptions.IllegalMessageDealingException;
+import io.github.et.tools.GPT;
 import io.github.ettoolset.tools.logger.Logger;
 import io.github.ettoolset.tools.logger.LoggerNotDeclaredException;
 import kotlin.coroutines.CoroutineContext;
@@ -13,7 +14,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 
-import io.github.et.tools.Client;
 
 @SuppressWarnings("unused")
 public class Replier extends SimpleListenerHost {
@@ -32,7 +32,7 @@ public class Replier extends SimpleListenerHost {
     public void groupTalk(GroupMessageEvent msgEvent) throws IOException, LoggerNotDeclaredException {
         if(msgEvent.getMessage().contains(new At(msgEvent.getBot().getId()))) {
             MessageChain msg = msgEvent.getMessage();
-            String result = Client.getReply(msgProcess(msg));
+            String result = GPT.getReply(msgProcess(msg));
             MessageChain chain=new MessageChainBuilder()
                     .append(result)
                     .append(new At(msgEvent.getSender().getId()))
@@ -46,7 +46,7 @@ public class Replier extends SimpleListenerHost {
     @EventHandler
     public void privateTalk(FriendMessageEvent msgEvent) throws IOException, LoggerNotDeclaredException {
         MessageChain msg = msgEvent.getMessage();
-        String result = Client.getReply(msgProcess(msg));
+        String result = GPT.getReply(msgProcess(msg));
         msgEvent.getSubject().sendMessage(result);
         Logger logger=Logger.getDeclaredLogger();
         logger.info("Handled message reply at"+msgEvent.getSubject().getId());
