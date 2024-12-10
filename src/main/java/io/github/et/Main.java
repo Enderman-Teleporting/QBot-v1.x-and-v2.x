@@ -22,7 +22,7 @@ import java.util.Properties;
 
 public class Main {
     public static String URL = "https://free.v36.cm/v1/chat/completions";
-    public static String Image_URL = "https://free.v36.cm/v1/images/generations";
+    //public static String Image_URL = "https://free.v36.cm/v1/images/generations";
     public static String APIKEY;
     public static void main(String[] args) throws IOException, BotInfoNotFoundException, RepeatedLoggerDeclarationException, LevelNotMatchException {
         Logger logger;
@@ -36,7 +36,10 @@ public class Main {
             new File("./botInfo.properties").createNewFile();
             throw new BotInfoNotFoundException("Cannot load bot info from file: ./botInfo.properties");
         }
-        if(botInfo.getProperty("Log").equals("null")){
+        if (botInfo.getProperty("Log") == null) {
+            logger=new Logger(Logger.Levels.DEBUG,null);
+        }
+        else if(botInfo.getProperty("Log").equals("null")){
             logger=new Logger(Logger.Levels.DEBUG,null);
         }else{
             logger=new Logger(Logger.Levels.DEBUG,botInfo.getProperty("Log"));

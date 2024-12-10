@@ -24,7 +24,7 @@ public class GPT {
                     + "\"messages\": ["
                     + "{"
                     + "\"role\": \"user\","
-                    + "\"content\": \""+question.replace("\n","\\n")+"\""
+                    + "\"content\": \""+question.replace("\n","<br/>")+"\""
                     + "}"
                     + "]"
                     + "}";

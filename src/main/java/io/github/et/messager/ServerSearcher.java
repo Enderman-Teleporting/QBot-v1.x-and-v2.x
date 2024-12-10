@@ -27,7 +27,7 @@ public class ServerSearcher extends SimpleListenerHost {
     public void search(MessageEvent msgEvent) throws LoggerNotDeclaredException {
         if(msgEvent.getMessage().contentToString().startsWith("查服 ")){
             String msg = msgEvent.getMessage().contentToString();
-            msg=msg.substring(4);
+            msg=msg.substring(3);
             if(msg.contains(":")){
                 String[] list=msg.split(":");
                 msgEvent.getSubject().sendMessage(ServerSearching.search(list[0],Integer.parseInt(list[1])));

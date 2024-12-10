@@ -53,12 +53,15 @@ public class Replier extends SimpleListenerHost {
     }
 
     public static String msgProcess(MessageChain msg){
-        StringBuilder textMessage = new StringBuilder("");
+        StringBuilder textMessage = new StringBuilder();
         for (SingleMessage messageContent : msg) {
             if (messageContent instanceof PlainText) {
                 PlainText plainText = (PlainText) messageContent;
                 textMessage.append(plainText.getContent());
             }
+//             else if (messageContent instanceof Image) {
+//
+//            }
         }
         return textMessage.toString();
     }
