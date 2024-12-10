@@ -30,10 +30,10 @@ public class Nudger extends SimpleListenerHost {
     @EventHandler
     public void runNudge(NudgeEvent nudgeEvent) throws LoggerNotDeclaredException {
         String[]  reply= {"哎呀,别戳啦,人家害羞", "说,你是不是个老变态？！", "你再戳,在戳一下试试", "贴贴", "6", "啊……啊……好热", "好痒……", "这么不要脸？！", "轻点……"};
-        if(nudgeEvent.getTarget().equals(nudgeEvent.getBot())) {
+        if(nudgeEvent.getTarget().getId()==nudgeEvent.getBot().getId()) {
             Nudge nudge = nudgeEvent.getFrom().nudge();
             nudge.sendTo(nudgeEvent.getSubject());
-            nudgeEvent.getSubject().sendMessage(reply[new Random().nextInt(0, reply.length - 1)]);
+            nudgeEvent.getSubject().sendMessage(reply[new Random().nextInt(0, reply.length)]);
             Logger logger = Logger.getDeclaredLogger();
             logger.info("Received and handled nudge event from %s", nudgeEvent.getSubject().getId());
         }

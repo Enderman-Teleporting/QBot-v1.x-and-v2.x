@@ -59,9 +59,9 @@ public class Replier extends SimpleListenerHost {
                 PlainText plainText = (PlainText) messageContent;
                 textMessage.append(plainText.getContent());
             }
-//             else if (messageContent instanceof Image) {
-//
-//            }
+             else if (messageContent instanceof Image) {
+                textMessage.append("![]("+((Image) messageContent).getImageId()+")");
+            }
         }
         return textMessage.toString();
     }
