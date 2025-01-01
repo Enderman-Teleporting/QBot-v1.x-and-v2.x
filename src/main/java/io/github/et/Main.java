@@ -22,7 +22,7 @@ import java.util.Properties;
 
 public class Main {
     public static String URL = "https://free.v36.cm/v1/chat/completions";
-    //public static String Image_URL = "https://free.v36.cm/v1/images/generations";
+    public static String Image_URL = "https://free.v36.cm/v1/images/generations";
     public static String APIKEY;
     public static void main(String[] args) throws IOException, BotInfoNotFoundException, RepeatedLoggerDeclarationException, LevelNotMatchException {
         Logger logger;
@@ -98,6 +98,10 @@ public class Main {
         if(botInfo.get("Pistol").equals("true")){
             bot.getEventChannel().registerListenerHost(new Roulette());
             logger.fine("Registered listener Roulette");
+        }
+        if(botInfo.get("Image").equals("true")){
+            bot.getEventChannel().registerListenerHost(new ImageGenerator());
+            logger.fine("Registered listener ImageGenerator");
         }
 
         new Thread(() -> {

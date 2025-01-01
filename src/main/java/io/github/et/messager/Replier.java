@@ -45,23 +45,27 @@ public class Replier extends SimpleListenerHost {
     }
     @EventHandler
     public void privateTalk(FriendMessageEvent msgEvent) throws IOException, LoggerNotDeclaredException {
-        MessageChain msg = msgEvent.getMessage();
-        String result = GPT.getReply(msgProcess(msg));
-        msgEvent.getSubject().sendMessage(result);
-        Logger logger=Logger.getDeclaredLogger();
-        logger.info("Handled message reply at"+msgEvent.getSubject().getId());
+        if(!msgEvent.getMessage().contentToString().startsWith("绘图 ")||msgEvent.getMessage().contentToString().startsWith("查服 ")) {
+            MessageChain msg = msgEvent.getMessage();
+            String result = GPT.getReply(msgProcess(msg));
+            msgEvent.getSubject().sendMessage(result);
+            Logger logger = Logger.getDeclaredLogger();
+            logger.info("Handled message reply at" + msgEvent.getSubject().getId());
+        }
     }
 
     public static String msgProcess(MessageChain msg){
         StringBuilder textMessage = new StringBuilder();
+        boolean noText=true;
         for (SingleMessage messageContent : msg) {
             if (messageContent instanceof PlainText) {
                 PlainText plainText = (PlainText) messageContent;
                 textMessage.append(plainText.getContent());
+                noText=false;
             }
-             else if (messageContent instanceof Image) {
-                textMessage.append("![]("+((Image) messageContent).getImageId()+")");
-            }
+        }
+        if(noText) {
+            textMessage.append("gpt-4o-mini模型无识图等功能，请发送文本消息");
         }
         return textMessage.toString();
     }
