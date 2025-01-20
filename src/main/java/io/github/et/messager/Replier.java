@@ -32,7 +32,7 @@ public class Replier extends SimpleListenerHost {
     public void groupTalk(GroupMessageEvent msgEvent) throws IOException, LoggerNotDeclaredException {
         if(msgEvent.getMessage().contains(new At(msgEvent.getBot().getId()))) {
             MessageChain msg = msgEvent.getMessage();
-            String result = GPT.getReply(msgProcess(msg));
+            String result = GPT.getReply(msgEvent.getSubject().getId(),msgProcess(msg));
             MessageChain chain=new MessageChainBuilder()
                     .append(result)
                     .append(new At(msgEvent.getSender().getId()))
@@ -47,7 +47,7 @@ public class Replier extends SimpleListenerHost {
     public void privateTalk(FriendMessageEvent msgEvent) throws IOException, LoggerNotDeclaredException {
         if(!msgEvent.getMessage().contentToString().startsWith("绘图 ")||msgEvent.getMessage().contentToString().startsWith("查服 ")) {
             MessageChain msg = msgEvent.getMessage();
-            String result = GPT.getReply(msgProcess(msg));
+            String result = GPT.getReply(msgEvent.getSubject().getId(),msgProcess(msg));
             msgEvent.getSubject().sendMessage(result);
             Logger logger = Logger.getDeclaredLogger();
             logger.info("Handled message reply at" + msgEvent.getSubject().getId());

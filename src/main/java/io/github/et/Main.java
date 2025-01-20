@@ -21,8 +21,8 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class Main {
-    public static String URL = "https://free.v36.cm/v1/chat/completions";
-    public static String Image_URL = "https://free.v36.cm/v1/images/generations";
+    public static String URL = "v1/chat/completions";
+    public static String Image_URL = "v1/images/generations";
     public static String APIKEY;
     public static void main(String[] args) throws IOException, BotInfoNotFoundException, RepeatedLoggerDeclarationException, LevelNotMatchException {
         Logger logger;
@@ -46,7 +46,7 @@ public class Main {
         }
 
         logger.debug("Initialized logger");
-        Deamon.runDeamon(RunMethod.CONSOLE);
+        //Deamon.runDeamon(RunMethod.CONSOLE);
         Bot bot= BotBuilder.positive(botInfo.getProperty("host"))
                 .token(botInfo.getProperty("token"))
                 .connect();
@@ -65,6 +65,14 @@ public class Main {
         if(botInfo.get("Reply").equals("true")){
             bot.getEventChannel().registerListenerHost(new Replier());
             APIKEY= botInfo.getProperty("API_KEY","");
+            String urlPrefix= botInfo.getProperty("Url","");
+            if(urlPrefix.endsWith("/")){
+                URL=urlPrefix+URL;
+                Image_URL = urlPrefix + Image_URL;
+            }else{
+                URL=urlPrefix+"/"+URL;
+                Image_URL = urlPrefix + "/" + Image_URL;
+            }
             logger.fine("Registered listener Replier");
         }
         if(botInfo.get("PassAddRequest").equals("true")){

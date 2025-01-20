@@ -2,9 +2,6 @@
 
 <small>使用mirai+OverFlow(本质上是OneBot)框架制作的QQ机器人</small>
 
-## 外部项目
-
-我们使用了[免费ChatGPT API](https://github.com/popjane/free_chatgpt_api)来进行消息的回复（感谢@popjane，若群聊较多，并行数较大，请使用付费API，详见该项目)。
 
 ## 主程序语言和其他库
 
@@ -28,3 +25,7 @@
 
 6. 确保NapCat已经完全启动，运行run.bat
 7. 完成！在Java窗口中可以输入help进行命令查询，可按提示输入指令
+
+### PS
+
+推荐一个[免费ChatGPT API](https://github.com/popjane/free_chatgpt_api)来进行消息的回复（感谢@popjane，若群聊较多，并行数较大，请使用付费API，详见该项目)。
