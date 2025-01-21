@@ -34,7 +34,7 @@ public class ImageGenerator extends SimpleListenerHost {
     public void generate(MessageEvent event) throws LoggerNotDeclaredException, IOException {
         Logger logger=Logger.getDeclaredLogger();
         if(event.getMessage().contentToString().startsWith("绘图 ")){
-            String prompt = event.getMessage().contentToString().substring(9).replace("\n","<br/>");
+            String prompt = event.getMessage().contentToString().substring(3).replace("\n","<br/>");
             String image = GPT_Image.generateImage(prompt);
             if(prompt.startsWith("生成图片失败")){
                 event.getSubject().sendMessage(image);
