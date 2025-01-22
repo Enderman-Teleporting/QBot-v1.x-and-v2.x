@@ -12,6 +12,8 @@ import io.github.ettoolset.tools.logger.Logger;
 import io.github.ettoolset.tools.logger.LoggerNotDeclaredException;
 import io.github.ettoolset.tools.logger.RepeatedLoggerDeclarationException;
 import net.mamoe.mirai.Bot;
+import org.fusesource.jansi.AnsiConsole;
+import org.fusesource.jansi.internal.JansiLoader;
 import top.mrxiaom.overflow.BotBuilder;
 
 import java.io.BufferedReader;
@@ -28,6 +30,7 @@ public class Main {
         Logger logger;
         System.out.println("Trying to load bot info from ./botInfo.properties");
         Properties botInfo;
+        AnsiConsole.systemInstall();
         try{
             botInfo=new Properties();
             botInfo.load(new BufferedReader(new FileReader("./botInfo.properties")));

@@ -7,7 +7,6 @@ import kotlin.coroutines.CoroutineContext;
 import net.mamoe.mirai.event.EventHandler;
 import net.mamoe.mirai.event.SimpleListenerHost;
 import net.mamoe.mirai.event.events.MessageEvent;
-import net.mamoe.mirai.message.data.MessageKey;
 import net.mamoe.mirai.message.data.PlainText;
 import net.mamoe.mirai.message.data.SingleMessage;
 import org.jetbrains.annotations.NotNull;
@@ -34,22 +33,25 @@ public class Repeater extends SimpleListenerHost {
     public void runRepeat(MessageEvent msgEvent) throws LoggerNotDeclaredException {
         long groupId = msgEvent.getSubject().getId();
         String msgContent = msgEvent.getMessage().contentToString();
-        for (SingleMessage a:msgEvent.getMessage()){
-            if(!(a instanceof PlainText)){
-                messageCountMap.remove(groupId);
-                return;
+        boolean isPlainText = true;
+
+        for (SingleMessage a : msgEvent.getMessage()) {
+            if (!(a instanceof PlainText)) {
+                isPlainText = false;
+                break;
             }
         }
+
+        if (!isPlainText) return;
+
         if (lastMessageMap.containsKey(groupId) && lastMessageMap.get(groupId) != null) {
-            if (lastMessageMap.get(groupId).equals(msgContent)) {
+            if (lastMessageMap.get(groupId).trim().equals(msgContent.trim())) {
                 int count = messageCountMap.getOrDefault(groupId, 1);
                 if (count == 1) {
                     msgEvent.getSubject().sendMessage(msgEvent.getMessage());
                     messageCountMap.put(groupId, count + 1);
                     Logger logger = Logger.getDeclaredLogger();
                     logger.info("Repeated message at %s", groupId);
-                } else {
-                    messageCountMap.put(groupId, count + 1);
                 }
             } else {
                 lastMessageMap.put(groupId, msgContent);
