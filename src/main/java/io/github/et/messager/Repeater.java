@@ -44,18 +44,13 @@ public class Repeater extends SimpleListenerHost {
 
         if (!isPlainText) return;
 
-        if (lastMessageMap.containsKey(groupId) && lastMessageMap.get(groupId) != null) {
-            if (lastMessageMap.get(groupId).trim().equals(msgContent.trim())) {
-                int count = messageCountMap.getOrDefault(groupId, 1);
-                if (count == 1) {
-                    msgEvent.getSubject().sendMessage(msgEvent.getMessage());
-                    messageCountMap.put(groupId, count + 1);
-                    Logger logger = Logger.getDeclaredLogger();
-                    logger.info("Repeated message at %s", groupId);
-                }
-            } else {
-                lastMessageMap.put(groupId, msgContent);
-                messageCountMap.put(groupId, 1);
+        if (lastMessageMap.containsKey(groupId) && lastMessageMap.get(groupId).equals(msgContent)) {
+            int count = messageCountMap.getOrDefault(groupId, 1);
+            if (count == 1) {
+                msgEvent.getSubject().sendMessage(msgEvent.getMessage());
+                messageCountMap.put(groupId, count + 1);
+                Logger logger = Logger.getDeclaredLogger();
+                logger.info("Repeated message at %s", groupId);
             }
         } else {
             lastMessageMap.put(groupId, msgContent);
