@@ -13,7 +13,6 @@ import net.mamoe.mirai.message.data.MessageChain;
 import net.mamoe.mirai.message.data.MessageChainBuilder;
 import net.mamoe.mirai.utils.ExternalResource;
 import org.jetbrains.annotations.NotNull;
-import top.mrxiaom.overflow.OverflowAPI;
 
 import java.io.IOException;
 

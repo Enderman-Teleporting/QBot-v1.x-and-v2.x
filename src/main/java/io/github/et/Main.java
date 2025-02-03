@@ -5,15 +5,12 @@ import io.github.et.exceptions.BotInfoNotFoundException;
 import io.github.et.games.roulette.Roulette;
 import io.github.et.messager.*;
 import io.github.et.tools.CommandConsole;
-import io.github.ettoolset.tools.deamon.Deamon;
-import io.github.ettoolset.tools.deamon.RunMethod;
 import io.github.ettoolset.tools.logger.LevelNotMatchException;
 import io.github.ettoolset.tools.logger.Logger;
 import io.github.ettoolset.tools.logger.LoggerNotDeclaredException;
 import io.github.ettoolset.tools.logger.RepeatedLoggerDeclarationException;
 import net.mamoe.mirai.Bot;
 import org.fusesource.jansi.AnsiConsole;
-import org.fusesource.jansi.internal.JansiLoader;
 import top.mrxiaom.overflow.BotBuilder;
 
 import java.io.BufferedReader;
@@ -26,10 +23,10 @@ public class Main {
     public static String URL = "v1/chat/completions";
     public static String Image_URL = "v1/images/generations";
     public static String APIKEY;
+    public static Properties botInfo;
     public static void main(String[] args) throws IOException, BotInfoNotFoundException, RepeatedLoggerDeclarationException, LevelNotMatchException {
         Logger logger;
         System.out.println("Trying to load bot info from ./botInfo.properties");
-        Properties botInfo;
         AnsiConsole.systemInstall();
         try{
             botInfo=new Properties();

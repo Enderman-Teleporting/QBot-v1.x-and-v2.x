@@ -25,7 +25,7 @@ public class GPT {
             userMessage.put("role", "user");
             userMessage.put("content", question);
             messageHistory.get(groupNum).add(userMessage);
-            if(messageHistory.get(groupNum).size() > 16) {
+            if(messageHistory.get(groupNum).size() > Integer.parseInt((String) Main.botInfo.getOrDefault("Max_Message_Count","16"))) {
                 messageHistory.get(groupNum).remove(0);
             }
             JSONObject info = new JSONObject();
@@ -54,14 +54,20 @@ public class GPT {
                     .getJSONObject(0)
                     .getJSONObject("message")
                     .getString("content");
-            JSONObject assistantMessage = new JSONObject();
-            assistantMessage.put("role", "assistant");
-            assistantMessage.put("content", content);
-            messageHistory.get(groupNum).add(assistantMessage);
-
+            if(content==null) {
+                throw new NullPointerException("content is null");
+            } else if(content.equals("null")){
+                throw new NullPointerException("content is null");
+            } else {
+                JSONObject assistantMessage = new JSONObject();
+                assistantMessage.put("role", "assistant");
+                assistantMessage.put("content", content);
+                messageHistory.get(groupNum).add(assistantMessage);
+            }
             return content;
 
         } catch (Exception e) {
+            messageHistory.get(groupNum).remove(messageHistory.get(groupNum).size() - 1);
             return "出错: " + e.getMessage();
         }
     }

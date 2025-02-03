@@ -2,6 +2,9 @@
 
 <small>使用mirai+OverFlow(本质上是OneBot)框架制作的QQ机器人</small>
 
+<large>**注意：本项目仅供学习交流使用，请勿用于非法用途**</large>
+
+[点击查看B站教程](https://www.bilibili.com/video/BV1ggf8YREkD/?share_source=copy_web&vd_source=b904c4c05cc1b7140840d80bc226110f)  给个币吧谢谢各位
 
 ## 主程序语言和其他库
 
