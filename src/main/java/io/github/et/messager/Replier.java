@@ -48,7 +48,7 @@ public class Replier extends SimpleListenerHost {
         if(!(msgEvent.getMessage().contentToString().startsWith("绘图 ")||msgEvent.getMessage().contentToString().startsWith("查服 "))) {
             MessageChain msg = msgEvent.getMessage();
             String a=msgProcess(msg);
-            String result = a.equals("gpt-4o-mini模型无识图等功能，请发送文本消息")?a:GPT.getReply(msgEvent.getSubject().getId(),a);
+            String result = a.equals("你好,请发送纯文本消息,谢谢")?a:GPT.getReply(msgEvent.getSubject().getId(),a);
             msgEvent.getSubject().sendMessage(result);
             Logger logger = Logger.getDeclaredLogger();
             logger.info("Handled message reply at" + msgEvent.getSubject().getId());
@@ -66,9 +66,12 @@ public class Replier extends SimpleListenerHost {
             }
         }
         if(noText) {
-            textMessage.append("gpt-4o-mini模型无识图等功能，请发送文本消息");
+            textMessage.append("你好,请发送纯文本消息,谢谢");
         }
         return textMessage.toString();
     }
+
+
+
 
 }

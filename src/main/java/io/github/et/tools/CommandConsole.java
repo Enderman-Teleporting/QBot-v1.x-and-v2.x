@@ -82,7 +82,7 @@ public class CommandConsole {
                 default -> logger.fine("Unknown Command, Type \"help\" For Help");
             }
         }catch(Exception e){
-            logger.fine("The Command Is Wrong, Type \"help\" For Help\n"+e);
+            logger.fine("Wrong Command, Type \"help\" For Help\n"+e);
         }
 
     }

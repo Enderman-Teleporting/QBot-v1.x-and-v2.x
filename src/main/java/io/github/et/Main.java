@@ -24,6 +24,7 @@ public class Main {
     public static String Image_URL = "v1/images/generations";
     public static String APIKEY;
     public static Properties botInfo;
+    public static Bot bot;
     public static void main(String[] args) throws IOException, BotInfoNotFoundException, RepeatedLoggerDeclarationException, LevelNotMatchException {
         Logger logger;
         System.out.println("Trying to load bot info from ./botInfo.properties");
@@ -47,7 +48,7 @@ public class Main {
 
         logger.debug("Initialized logger");
         //Deamon.runDeamon(RunMethod.CONSOLE);
-        Bot bot= BotBuilder.positive(botInfo.getProperty("host"))
+        bot= BotBuilder.positive(botInfo.getProperty("host"))
                 .token(botInfo.getProperty("token"))
                 .connect();
         if(bot==null){
@@ -110,6 +111,9 @@ public class Main {
         if(botInfo.get("Image").equals("true")){
             bot.getEventChannel().registerListenerHost(new ImageGenerator());
             logger.fine("Registered listener ImageGenerator");
+        }
+        if(botInfo.get("FreeTalk").equals("true")){
+            bot.getEventChannel().registerListenerHost(new FreeTalk());
         }
 
         new Thread(() -> {
